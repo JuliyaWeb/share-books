@@ -1,0 +1,40 @@
+<ion-content class="auth-page" padding>
+  <div class="content-inner">
+    <div class="info-wrapper" text-center>
+      <h1>Sing Up</h1>
+    </div>
+    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="auth-form">
+      <ion-list>
+        <ion-item>
+          <ion-label>
+            <fa-icon name="envelope"></fa-icon>
+          </ion-label>
+          <ion-input formControlName="email" type="email" placeholder="Email"></ion-input>
+        </ion-item>
+        <span *ngIf="formErrors && formErrors.email" class="error">
+            <span ion-text color="danger">{{ formErrors.email }}</span>
+          </span>
+        <ion-item>
+          <ion-label>
+            <fa-icon name="lock"></fa-icon>
+          </ion-label>
+          <ion-input formControlName="password" type="password" placeholder="Password"></ion-input>
+        </ion-item>
+        <span *ngIf="formErrors && formErrors.password" class="error">
+            <span ion-text color="danger">{{ formErrors.password }}</span>
+          </span>
+        <ion-item>
+          <ion-label>
+            <fa-icon name="lock"></fa-icon>
+          </ion-label>
+          <ion-input formControlName="confirm_password" type="password" placeholder="Confirm Password"></ion-input>
+        </ion-item>
+        <span *ngIf="formErrors && formErrors.confirm_password" class="error">
+            <span ion-text color="danger">{{ formErrors.confirm_password }}</span>
+          </span>
+      </ion-list>
+      <button ion-button block [disabled]="!form.valid">Sign Up</button>
+      <a class="btn btn-link" text-center (click)="goToLogin()">Already have an Account?</a>
+    </form>
+  </div>
+</ion-content>

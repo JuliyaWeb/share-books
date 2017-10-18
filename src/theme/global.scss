@@ -1,0 +1,37 @@
+@import "./variables";
+
+/***** Sub Nav *****/
+.sub-nav {
+  .tabbar {
+    border-color: $grey-color;
+  }
+}
+
+/**** General styles ****/
+ion-content.content {
+  background: $body-color;
+}
+ion-header {
+  .search-icon {
+    button {
+      background: none;
+    }
+  }
+  .toolbar .toolbar-background {
+    border: 0;
+  }
+}
+
+a.btn-link {
+  display: block;
+}
+
+ion-list {
+  .item-inner {
+    border-bottom: 0 !important;
+  }
+}
+
+img.profile-picture {
+  border-radius: 50%;
+}

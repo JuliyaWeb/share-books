@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-navbar>
+    <button menuToggle ion-button icon-only>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <div text-right class="search-icon">
+      <button icon-only>
+        <ion-icon name="search"></ion-icon>
+      </button>
+    </div>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div class="profile-header" padding>
+    <!--<div class="edit-profile-image" *ngIf="editProfile">-->
+    <!--<image-upload [icon]="'pencil'" (outputImg)="getImgSrc($event)"></image-upload>-->
+    <!--</div>-->
+    <div class="profile-basic">
+      <img class="profile-picture"
+           src="https://s3.amazonaws.com/ionic-io-static/9TxJELnATnW9H3MZZfdG_Profile_avatar_placeholder_large.png"
+           width="110" height="110"
+           style="display: block; margin-left: auto; margin-right: auto;">
+    </div>
+    <h1 class="profile-full-name" text-center>{{user?.fullName}}</h1>
+  </div>
+  <div class="profile-page-content">
+    <div class="profile-tab-bar">
+      <ion-segment [(ngModel)]="segment">
+        <ion-segment-button value="info">
+          Профиль
+        </ion-segment-button>
+        <ion-segment-button value="books">
+          Мои Книги
+        </ion-segment-button>
+        <ion-segment-button value="archive">
+          Прочитано
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+    <div [ngSwitch]="segment">
+      <div class="segment-wrapper" *ngSwitchCase="'info'"></div>
+      <div class="segment-wrapper" *ngSwitchCase="'books'"></div>
+      <div class="segment-wrapper" *ngSwitchCase="'archive'"></div>
+    </div>
+  </div>
+</ion-content>
