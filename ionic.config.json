@@ -2,5 +2,7 @@
   "name": "share-books",
   "app_id": "c15dec29",
   "type": "ionic-angular",
-  "integrations": {}
+  "integrations": {
+    "cordova": {}
+  }
 }

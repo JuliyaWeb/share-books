@@ -3,28 +3,33 @@
     <button menuToggle ion-button icon-only>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <div text-right class="search-icon">
-      <button icon-only>
-        <ion-icon name="search"></ion-icon>
+    <div text-right class="configs">
+      <button icon-only clear *ngIf="!editProfile" (click)="toggleEditProfile()">
+        <fa-icon name="cogs" class="icon"></fa-icon>
       </button>
+      <div *ngIf="editProfile" class="edit-row">
+        <!--<button ion-button clear (click)="saveData()">Сохранить</button>-->
+        <ion-title (click)="saveData()">Сохранить</ion-title>
+        <button icon-only clear (click)="toggleEditProfile()">
+          <fa-icon name="close" class="icon"></fa-icon>
+        </button>
+      </div>
     </div>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <div class="profile-header" padding>
-    <!--<div class="edit-profile-image" *ngIf="editProfile">-->
-    <!--<image-upload [icon]="'pencil'" (outputImg)="getImgSrc($event)"></image-upload>-->
-    <!--</div>-->
-    <div class="profile-basic">
-      <img class="profile-picture"
-           src="https://s3.amazonaws.com/ionic-io-static/9TxJELnATnW9H3MZZfdG_Profile_avatar_placeholder_large.png"
-           width="110" height="110"
-           style="display: block; margin-left: auto; margin-right: auto;">
-    </div>
-    <h1 class="profile-full-name" text-center>{{user?.fullName}}</h1>
+  <div class="profile-edit-content" *ngIf="editProfile">
+    <info-edit></info-edit>
   </div>
-  <div class="profile-page-content">
+  <div class="profile-info-content" *ngIf="!editProfile">
+    <div class="profile-header" padding>
+      <div class="profile-basic">
+        <img class="profile-picture"
+             src="https://s3.amazonaws.com/ionic-io-static/9TxJELnATnW9H3MZZfdG_Profile_avatar_placeholder_large.png">
+      </div>
+      <h1 class="profile-full-name" text-center>{{user?.fullName}}</h1>
+    </div>
     <div class="profile-tab-bar">
       <ion-segment [(ngModel)]="segment">
         <ion-segment-button value="info">
@@ -39,7 +44,9 @@
       </ion-segment>
     </div>
     <div [ngSwitch]="segment">
-      <div class="segment-wrapper" *ngSwitchCase="'info'"></div>
+      <div class="segment-wrapper" *ngSwitchCase="'info'">
+        <info></info>
+      </div>
       <div class="segment-wrapper" *ngSwitchCase="'books'"></div>
       <div class="segment-wrapper" *ngSwitchCase="'archive'"></div>
     </div>

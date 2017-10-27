@@ -1,0 +1,61 @@
+<div class="content-wrapper">
+  <div class="profile-header" padding>
+    <!--<div class="edit-profile-image" *ngIf="editProfile">-->
+    <!--<image-upload [icon]="'pencil'" (outputImg)="getImgSrc($event)"></image-upload>-->
+    <!--</div>-->
+    <div class="user-picture">
+      <img class="profile-picture"
+           src="https://s3.amazonaws.com/ionic-io-static/9TxJELnATnW9H3MZZfdG_Profile_avatar_placeholder_large.png">
+    </div>
+  </div>
+  <div class="content">
+    <ion-card>
+      <ion-card-header>Общая Информация</ion-card-header>
+      <ion-card-content>
+        <form [formGroup]="generalForm">
+          <ion-item>
+            <ion-label float-left>Имя</ion-label>
+            <ion-input formControlName="user_name" type="text"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label float-left>Сейчас читаю</ion-label>
+            <ion-input formControlName="active_book" type="text"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label float-left>Ищу</ion-label>
+            <ion-input formControlName="find_book" type="text"></ion-input>
+          </ion-item>
+        </form>
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <ion-card-header>Мои предпочтения</ion-card-header>
+      <ion-card-content>
+        <form [formGroup]="preferencesForm">
+          <div class="input-wrapper">
+            <ion-label float-left>Автор(ы)</ion-label>
+            <div formArrayName="authors">
+              <div class="form-group" *ngFor="let author of preferencesForm.controls['authors'].controls; let i=index">
+                <div class="search-input" [formGroupName]="i">
+                  <ion-input type="text" class="form-control" formControlName="author"></ion-input>
+                  <fa-icon name="close" class="icon-remove" *ngIf="i > 0"
+                           (click)="removeAuthor(i)"></fa-icon>
+                </div>
+              </div>
+              <fa-icon name="plus-circle" class="icon-plus-circle" (click)="addAuthor()"></fa-icon>
+            </div>
+          </div>
+          <ion-item>
+            <ion-label float-left>Жанр(ы)</ion-label>
+            <ion-select formControlName="genres" multiple="true">
+              <ion-option *ngFor="let item of genresList" value="{{item.$value}}">{{item.$value}}</ion-option>
+            </ion-select>
+          </ion-item>
+          <ul *ngIf="selectedGenres.length > 0" class="list-item">
+            <li *ngFor="let item of selectedGenres">{{item}}</li>
+          </ul>
+        </form>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</div>

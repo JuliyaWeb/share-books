@@ -3,7 +3,7 @@ import { NavController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { RegisterForm, FormHelper } from "../../../core/helpers";
 import { LoginPage } from "../login/login";
-import { AuthService } from "../../../core/services/auth/auth-firebase.service";
+import { AuthService } from "../../../core/auth/auth.service";
 
 @Component({
   selector: 'page-register',

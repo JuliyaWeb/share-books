@@ -4,7 +4,7 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { RegisterPage } from "../register/register";
 import { TabsPage } from "../../tabs/tabs";
 import { LoginForm, FormHelper } from "../../../core/helpers";
-import { AuthService } from "../../../core/services/auth/auth-firebase.service";
+import { AuthService } from "../../../core/auth/auth.service";
 
 @Component({
   selector: 'page-login',

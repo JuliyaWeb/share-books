@@ -2,18 +2,18 @@ import { Injectable } from "@angular/core";
 import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from "angularfire2/database";
 import { AngularFireAuth } from "angularfire2/auth";
-import { User } from "../../models/user.model";
+import { User } from "../models/user.model";
 import { Session } from "./session";
 // TODO rxjs
 import 'rxjs/add/operator/switchMap';
+import { FirebaseService } from '../helpers/firebase-service';
 
 @Injectable()
 
 export class AuthService {
   public dbUsers: FirebaseListObservable<any[]>;
 
-  constructor(public afAuth: AngularFireAuth,
-              private db: AngularFireDatabase,
+  constructor(private _fbService: FirebaseService,
               private _session: Session) {
   }
 
@@ -29,7 +29,8 @@ export class AuthService {
       this._restoreSession();
     }
   }
- // TODO check function
+
+  // TODO check function
   private _restoreSession() {
     if (this.isActiveSession()) {
       console.info('_restoreSession', this._session.token);
@@ -56,15 +57,15 @@ export class AuthService {
   }
 
   register(email: string, password: string) {
-    return this.afAuth.auth.createUserWithEmailAndPassword(email, password);
+    return this._fbService.afAuth.auth.createUserWithEmailAndPassword(email, password);
   }
 
   login(email: string, password: string) {
-    return this.afAuth.auth.signInWithEmailAndPassword(email, password)
+    return this._fbService.afAuth.auth.signInWithEmailAndPassword(email, password)
       .then((success) => {
-          this.afAuth.auth.currentUser.getIdToken().then(
+          this._fbService.afAuth.auth.currentUser.getIdToken().then(
             (token: string) => {
-              const uid = this.afAuth.auth.currentUser.uid;
+              const uid = this._fbService.afAuth.auth.currentUser.uid;
               this.initSession(token, uid);
             })
             .catch((error) => {
@@ -75,21 +76,21 @@ export class AuthService {
   }
 
   createUser(uid: string, email: string) {
-    return this.db.object(`/users/${uid}`).set({
+    this._fbService.setDbObject(`/users/${uid}`, {
       email: email,
       uid: uid
     });
   }
 
   private _initCurrentUser(uid: string) {
-    this.db.list(`users`).subscribe((data) => {
+    this._fbService.getDbList(`users`).subscribe((data) => {
       const user = data.find((u) => u.$key == uid);
       user && (this._session.currentUser = user);
     });
   }
 
   logout() {
-    this.afAuth.auth.signOut();
+    this._fbService.afAuth.auth.signOut();
     this._session.clean();
   }
 }

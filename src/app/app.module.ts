@@ -7,13 +7,13 @@ import { MyApp } from './app.component';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
-
 import { firebaseConfig } from "../core/config/config";
+import { FirebaseService } from '../core/helpers/firebase-service';
 // App Pages
 import { APP_PAGES } from '../pages/index';
 // Providers
-import { Session } from "../core/services/auth/session";
-import { AuthService } from "../core/services/auth/auth-firebase.service";
+import { Session } from "../core/auth/session";
+import { AuthService } from "../core/auth/auth.service";
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -45,6 +45,7 @@ import { ComponentsModule } from "../components/components.module";
     StatusBar,
     SplashScreen,
     AngularFireAuth,
+    FirebaseService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

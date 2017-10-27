@@ -11,6 +11,7 @@ export class TabsPage {
   tab2Root = HomePage;
   tab3Root = HomePage;
   tab4Root = HomePage;
+  tab5Root = HomePage;
 
   constructor() {
 

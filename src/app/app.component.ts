@@ -5,7 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from "../pages/auth/login/login";
-import { AuthService } from "../core/services/auth/auth-firebase.service";
+import { AuthService } from "../core/auth/auth.service";
 
 @Component({
   templateUrl: 'app.html'
@@ -19,7 +19,6 @@ export class MyApp {
               private authService: AuthService) {
 
     this.rootPage = (authService.isActiveSession()) ? TabsPage : LoginPage;
-    console.log('isActiveSession', authService.isActiveSession());
 
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
